@@ -1,3 +1,4 @@
+/* eslint-disable use-isnan */
 /* ********************************************************************************************
  *                                                                                            *
  * Please read the following tutorial before implementing tasks:                               *
@@ -102,8 +103,8 @@ function getArrayOfStrings(arr) {
  *    [ 1, 2, 3, 4, 5, 'false' ]         => [ 1, 2, 3, 4, 5, 'false' ]
  *    [ false, 0, NaN, '', undefined ]   => [ ]
  */
-function removeFalsyValues(/* arr */) {
-  throw new Error('Not implemented');
+function removeFalsyValues(arr) {
+  return arr.filter((x) => x !== undefined && x !== false && x !== null && x !== 0 && x !== NaN && x !== '');
 }
 
 /**
@@ -144,11 +145,14 @@ function getStringsLength(arr) {
  * @param {number} index
  *
  * @example
- *    [ 1, 3, 4, 5 ], 2, 1  => [ 1, 2, 3, 4, 5 ]
+ *    [ 1, 3, 4, 5 ], 1, 2  => [ 1, 2, 3, 4, 5 ]
  *    [ 1, 'b', 'c'], 0, 'x'  => [ 'x', 1, 'b', 'c' ]
  */
-function insertItem(/* arr, item, index */) {
-  throw new Error('Not implemented');
+function insertItem(arr, item, index) {
+  const firstArr = arr.slice(index);
+  // eslint-disable-next-line no-param-reassign
+  arr[index] = item;
+  return arr.slice(0, index + 1).concat(firstArr);
 }
 
 /**
@@ -218,8 +222,8 @@ function toCsvText(/* arr */) {
  *   [ 0, 1, 2, 3, 4, 5 ] => [ 0, 1, 4, 9, 16, 25 ]
  *   [ 10, 100, -1 ]      => [ 100, 10000, 1 ]
  */
-function toArrayOfSquares(/* arr */) {
-  throw new Error('Not implemented');
+function toArrayOfSquares(arr) {
+  return arr.map((x) => x ** 2);
 }
 
 
@@ -252,8 +256,12 @@ function getMovingSum(/* arr */) {
  * [ 'a', 'b', 'c' , null ]  => [ "b", null ]
  * [ "a" ] => []
  */
-function getSecondItems(/* arr */) {
-  throw new Error('Not implemented');
+function getSecondItems(arr) {
+  const res = [];
+  for (let i = 1; i < arr.length; i += 2) {
+    res.push(arr[i]);
+  }
+  return res;
 }
 
 
@@ -474,8 +482,9 @@ function getIntervalArray(/* start, end */) {
  *   [ 'a', 'a', 'a', 'a' ]  => [ 'a' ]
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
-function distinct(/* arr */) {
-  throw new Error('Not implemented');
+function distinct(arr) {
+  const mySet = new Set(arr);
+  return Array.from(mySet);
 }
 
 /**
