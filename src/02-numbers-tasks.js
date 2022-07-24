@@ -236,10 +236,11 @@ function isPrime(n) {
  *   toNumber(new Number(42), 0) => 42
  */
 function toNumber(value, def) {
-  if (value === null) {
+  // eslint-disable-next-line no-restricted-globals
+  if (isNaN(Number(value)) || value === null) {
     return def;
   }
-  return def;
+  return value;
 }
 
 module.exports = {

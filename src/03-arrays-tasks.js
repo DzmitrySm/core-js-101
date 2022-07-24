@@ -110,10 +110,12 @@ function getArrayOfStrings(arr) {
  *    [ false, 0, NaN, '', undefined ]   => [ ]
  */
 function removeFalsyValues(arr) {
-  if (arr.filter((x) => x !== undefined && x !== false && x !== null && x !== 0 && x !== NaN && x !== '').length === 0) {
+  // eslint-disable-next-line no-restricted-globals, no-self-compare
+  if (arr.filter((x) => x !== undefined && x !== false && x !== null && x !== 0 && x === x && x !== '').length === 0) {
     return [];
   }
-  return arr.filter((x) => x !== undefined && x !== false && x !== null && x !== 0 && x !== NaN && x !== '');
+  // eslint-disable-next-line no-restricted-globals, no-self-compare
+  return arr.filter((x) => x !== undefined && x !== false && x !== null && x !== 0 && x === x && x !== '');
 }
 
 /**
@@ -399,7 +401,8 @@ function getFalsyValuesCount(arr) {
   if (arr.length === 0) {
     return 0;
   }
-  return arr.length - arr.filter((n) => n !== null);
+  // eslint-disable-next-line no-self-compare
+  return arr.length - arr.filter((x) => x !== undefined && x !== false && x !== null && x !== 0 && x === x && x !== '');
 }
 
 /**
