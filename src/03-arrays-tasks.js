@@ -160,10 +160,7 @@ function getStringsLength(arr) {
  *    [ 1, 'b', 'c'], 0, 'x'  => [ 'x', 1, 'b', 'c' ]
  */
 function insertItem(arr, item, index) {
-  const firstArr = arr.slice(index);
-  // eslint-disable-next-line no-param-reassign
-  arr[index] = item;
-  return arr.slice(0, index + 1).concat(firstArr);
+  return arr.splice(index, 0, item);
 }
 
 /**
@@ -294,8 +291,17 @@ function getSecondItems(arr) {
  *  [ 'a', 'b', 'c', null ] => [ 'a', 'b','b', 'c','c','c',  null,null,null,null ]
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
-function propagateItemsByPositionIndex(/* arr */) {
-  throw new Error('Not implemented');
+function propagateItemsByPositionIndex(arr) {
+  if (arr.length === 0) {
+    return [];
+  } if (arr.length === 1) {
+    return [1];
+  }
+  let resStr = '';
+  for (let i = 0; i < arr.length; i += 1) {
+    resStr += arr[i].toString().repeat(i);
+  }
+  return resStr.split('');
 }
 
 
@@ -362,8 +368,24 @@ function getPositivesCount(arr) {
  *   [ 'nine','eight','nine','eight'] => [ 'eight','eight','nine','nine']
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
-function sortDigitNamesByNumericOrder(/* arr */) {
-  throw new Error('Not implemented');
+function sortDigitNamesByNumericOrder(arr) {
+  const obj = {
+    zero: 0,
+    one: 1,
+    two: 2,
+    three: 3,
+    four: 4,
+    five: 5,
+    six: 6,
+    seven: 7,
+    eight: 8,
+    nine: 9,
+  };
+  const arr1 = [];
+  for (let i = 0; i < arr.length; i += 1) {
+    arr1.push(arr[i]);
+  }
+  return arr1.sort((a, b) => obj[a] - obj[b]);
 }
 
 /**
@@ -401,8 +423,11 @@ function getFalsyValuesCount(arr) {
   if (arr.length === 0) {
     return 0;
   }
-  // eslint-disable-next-line no-self-compare
-  return arr.length - arr.filter((x) => x !== undefined && x !== false && x !== null && x !== 0 && x === x && x !== '');
+  const arr1 = [];
+  for (let i = 0; i < arr.length; i += 1) {
+    arr1.push(arr[i]);
+  }
+  return arr1.filter((x) => !!x === false).length;
 }
 
 /**
@@ -466,8 +491,8 @@ function toStringList(arr) {
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  *    ]
  */
-function sortCitiesArray(/* arr */) {
-  throw new Error('Not implemented');
+function sortCitiesArray(arr) {
+  return arr.sort((a, b) => a.country - b.country);
 }
 
 /**
