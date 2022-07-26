@@ -171,15 +171,10 @@ function doRectanglesOverlap(/* rect1, rect2 */) {
  *
  */
 function isInsideCircle(circle, point) {
-  const circumXMax = circle.center.x + circle.radius;
-  const circumXMin = circle.center.x - circle.radius;
-  const circumYMax = circle.center.y + circle.radius;
-  const circumYMin = circle.center.y - circle.radius;
-  if (point.x >= circumXMax || point.x <= circumXMin
-    || point.y >= circumYMax || point.y <= circumYMin) {
-    return false;
+  if ((point.x - circle.center.x) ** 2 + (point.y - circle.center.y) ** 2 < circle.radius ** 2) {
+    return true;
   }
-  return true;
+  return false;
 }
 
 
@@ -229,8 +224,7 @@ function findFirstSingleChar(str) {
  */
 function getIntervalString(a, b) {
   const sortArr = [a, b].sort((c, d) => c - d);
-  const str = `[${sortArr}]`;
-  return str;
+  return sortArr;
 }
 
 
@@ -290,8 +284,21 @@ function reverseInteger(num) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
+function isCreditCardNumber(ccn) {
+  const arr = ccn.toString().split('');
+  for (let i = arr.length - 1; i >= 0; i -= 1) {
+    if (arr.indexOf(arr[i]) % 2 === 0) {
+      arr[i] *= 2;
+    }
+    if (arr[i] * 2 > 9) {
+      arr[i] = (arr[i] * 2).toString().split('').reduce((a, b) => a + b);
+    }
+  }
+  const result = arr.reduce((a, b) => a + b).toString().split('');
+  if (result[result.length - 1] === 0) {
+    return true;
+  }
+  return false;
 }
 
 /**

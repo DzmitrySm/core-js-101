@@ -299,7 +299,14 @@ function propagateItemsByPositionIndex(arr) {
   }
   let resStr = '';
   for (let i = 0; i < arr.length; i += 1) {
-    resStr += arr[i].toString().repeat(i);
+    if (arr[i] === null) {
+      // eslint-disable-next-line no-param-reassign
+      arr[i] = `${arr[i]}`.repeat(i + 1);
+    } else {
+      // eslint-disable-next-line no-param-reassign
+      arr[i] = arr[i].repeat(i + 1);
+    }
+    resStr += arr[i];
   }
   return resStr.split('');
 }
@@ -492,7 +499,8 @@ function toStringList(arr) {
  *    ]
  */
 function sortCitiesArray(arr) {
-  return arr.sort((a, b) => a.country - b.country);
+  const sortArr = arr.sort((a, b) => a.country - b.country);
+  return sortArr;
 }
 
 /**
@@ -603,7 +611,7 @@ function group(/* array, keySelector, valueSelector */) {
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
 function selectMany(arr, childrenSelector) {
-  return arr.map((x) => x(childrenSelector));
+  return arr.map((x) => childrenSelector(x).flat());
 }
 
 
