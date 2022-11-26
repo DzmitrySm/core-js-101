@@ -80,7 +80,7 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
-  return `${endDate.getMonth() - startDate.getMonth()}`;
+  return `0${Math.floor((endDate - startDate) / 3600000)}:0${Math.floor((endDate - startDate) % 3600000) / 60000}:0${Math.floor((endDate - startDate) % 3600000) / 60000 / 1000}.${Math.floor((endDate - startDate) % 3600000) / 60000}:0${Math.floor((endDate - startDate) % 3600000) / 60000 / 1000}`;
 }
 
 

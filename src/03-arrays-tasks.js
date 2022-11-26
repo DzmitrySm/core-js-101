@@ -215,8 +215,9 @@ function getTail(arr, n) {
  *    +'20,21,22,23,24\n'
  *    +'30,31,32,33,34'
  */
-function toCsvText(/* arr */) {
-  throw new Error('Not implemented');
+function toCsvText(arr) {
+  arr.forEach((x) => x.push('\n'));
+  return arr.flat().slice(0, arr.flat().length - 1).toString();
 }
 
 /**
@@ -615,7 +616,7 @@ function group(/* array, keySelector, valueSelector */) {
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
 function selectMany(arr, childrenSelector) {
-  return arr.map((x) => childrenSelector(x).flat());
+  return arr.map((x) => childrenSelector(x.flat()));
 }
 
 
@@ -639,7 +640,7 @@ function getElementByIndexes(arr, indexes) {
     indStr += `[${indexes[i]}]`;
   }
   // eslint-disable-next-line no-console
-  console.log(indStr.split());
+  console.log(indStr);
   // eslint-disable-next-line no-console
   console.log(typeof indStr);
   return arr`${indStr}`;
