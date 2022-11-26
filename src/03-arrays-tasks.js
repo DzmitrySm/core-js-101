@@ -640,6 +640,7 @@ function getElementByIndexes(arr, indexes) {
   }
   // eslint-disable-next-line no-console
   console.log(indStr.split());
+  // eslint-disable-next-line no-console
   console.log(typeof indStr);
   return arr`${indStr}`;
 }
