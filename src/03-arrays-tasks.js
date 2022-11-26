@@ -294,21 +294,15 @@ function getSecondItems(arr) {
 function propagateItemsByPositionIndex(arr) {
   if (arr.length === 0) {
     return [];
-  } if (arr.length === 1) {
-    return [1];
   }
-  let resStr = '';
+  const resArr = [];
   for (let i = 0; i < arr.length; i += 1) {
-    if (arr[i] === null) {
-      // eslint-disable-next-line no-param-reassign
-      arr[i] = `${arr[i]}`.repeat(i + 1);
-    } else {
-      // eslint-disable-next-line no-param-reassign
-      arr[i] = arr[i].repeat(i + 1);
+    // eslint-disable-next-line no-param-reassign
+    if (typeof arr[i] === 'string') {
+      resArr.push(arr[i].repeat(arr.indexOf(arr[i] + 1)));
     }
-    resStr += arr[i];
   }
-  return resStr.split('');
+  return resArr;
 }
 
 
@@ -521,8 +515,18 @@ function sortCitiesArray(arr) {
  *           [0,0,0,1,0],
  *           [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
+function getIdentityMatrix(n) {
+  const arr = [];
+  for (let i = 0; i < n; i += 1) {
+    arr.push([]);
+    for (let j = 0; j < n; j += 1) {
+      arr[i][j] = 0;
+      if (j === arr.indexOf(arr[i])) {
+        arr[i][j] = 1;
+      }
+    }
+  }
+  return arr;
 }
 
 /**
@@ -627,8 +631,17 @@ function selectMany(arr, childrenSelector) {
  *   ['one','two','three'], [2]       => 'three'  (arr[2])
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
-function getElementByIndexes(/* arr, indexes */) {
-  throw new Error('Not implemented');
+function getElementByIndexes(arr, indexes) {
+  // eslint-disable-next-line no-console
+  console.log(indexes);
+  let indStr = '';
+  for (let i = 0; i < indexes.length; i += 1) {
+    indStr += `[${indexes[i]}]`;
+  }
+  // eslint-disable-next-line no-console
+  console.log(indStr.split());
+  console.log(typeof indStr);
+  return arr`${indStr}`;
 }
 
 
