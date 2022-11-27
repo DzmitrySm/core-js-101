@@ -216,7 +216,8 @@ function getTail(arr, n) {
  *    +'30,31,32,33,34'
  */
 function toCsvText(arr) {
-  arr.forEach((x) => x.push('\n'));
+  // eslint-disable-next-line no-return-assign, no-param-reassign
+  arr.forEach((x) => x[x.length - 1] = `${x}\n`);
   return arr.flat().slice(0, arr.flat().length - 1).toString();
 }
 
@@ -295,15 +296,26 @@ function getSecondItems(arr) {
 function propagateItemsByPositionIndex(arr) {
   if (arr.length === 0) {
     return [];
+  } if (arr.length === 1) {
+    return arr;
   }
   const resArr = [];
   for (let i = 0; i < arr.length; i += 1) {
     // eslint-disable-next-line no-param-reassign
     if (typeof arr[i] === 'string') {
-      resArr.push(arr[i].repeat(arr.indexOf(arr[i] + 1)));
+      resArr.push(arr[i].repeat(i + 1));
     }
+    if (typeof arr[i] !== 'string') resArr.push((`${arr[i]}`).repeat(i + 1));
   }
-  return resArr;
+  const finalRes = resArr.reduce((a, b) => a + b);
+  const result = (finalRes.split('null'));
+  for (let i = 0; i < result.length; i += 1) {
+    if (result[i] === '') {
+      result[i] = null;
+    } else {
+      result[i] = result[i].split('');
+    }
+  } return result.flat();
 }
 
 
@@ -494,9 +506,12 @@ function toStringList(arr) {
  *    ]
  */
 function sortCitiesArray(arr) {
-  const sortArr = arr.sort((a, b) => a.country - b.country);
-  return sortArr;
+  const sortArr = arr.sort((a, b) => (a.country > b.country ? 1 : -1));
+  // eslint-disable-next-line max-len
+  const sortArrRes = sortArr.sort((a, b) => ((a.country === b.country && a.city < b.city) ? 1 : -1));
+  return sortArrRes.reverse();
 }
+
 
 /**
  * Creates an identity matrix of the specified size
@@ -597,8 +612,14 @@ function distinct(arr) {
  *    "Poland" => ["Lodz"]
  *   }
  */
-function group(/* array, keySelector, valueSelector */) {
-  throw new Error('Not implemented');
+function group(array, keySelector, valueSelector) {
+  const myMap = new Map();
+  for (let i = 0; i < array.length; i += 1) {
+    if (!myMap.has(array[i][keySelector])) {
+      myMap.set(array[i][keySelector][valueSelector]);
+    }
+  }
+  return myMap;
 }
 
 
@@ -615,8 +636,8 @@ function group(/* array, keySelector, valueSelector */) {
  *   [[1, 2], [3, 4], [5, 6]], (x) => x     =>   [ 1, 2, 3, 4, 5, 6 ]
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
-function selectMany(arr, childrenSelector) {
-  return arr.map((x) => childrenSelector(x.flat()));
+function selectMany(/* arr, childrenSelector */) {
+  throw new Error('Not implemented');
 }
 
 
