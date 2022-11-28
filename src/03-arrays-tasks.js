@@ -616,7 +616,7 @@ function group(array, keySelector, valueSelector) {
   const myMap = new Map();
   for (let i = 0; i < array.length; i += 1) {
     if (!myMap.has(array[i][keySelector])) {
-      myMap.set(array[i][keySelector][valueSelector]);
+      myMap.set(array[i][keySelector], [valueSelector]);
     }
   }
   return myMap;

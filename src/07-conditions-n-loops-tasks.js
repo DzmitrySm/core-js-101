@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* *************************************************************************************************
  *                                                                                                *
  * Please read the following tutorial before implementing tasks:                                   *
@@ -222,9 +223,21 @@ function findFirstSingleChar(str) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString(a, b) {
+
+function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
   const sortArr = [a, b].sort((c, d) => c - d);
-  return sortArr;
+  if (isStartIncluded === true && isEndIncluded === true) {
+    return `[${sortArr[0]}, ${sortArr[1]}]`;
+  }
+  if (isStartIncluded === true && isEndIncluded === false) {
+    return `[${sortArr[0]}, ${sortArr[1]})`;
+  }
+  if (isStartIncluded === false && isEndIncluded === true) {
+    return `(${sortArr[0]}, ${sortArr[1]}]`;
+  }
+  if (isStartIncluded === false && isEndIncluded === false) {
+    return `(${sortArr[0]}, ${sortArr[1]})`;
+  }
 }
 
 
