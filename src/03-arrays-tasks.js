@@ -664,7 +664,7 @@ function getElementByIndexes(arr, indexes) {
   console.log(indStr);
   // eslint-disable-next-line no-console
   console.log(typeof indStr);
-  return arr`${indStr}`;
+  return +`${arr}${indStr}`;
 }
 
 
