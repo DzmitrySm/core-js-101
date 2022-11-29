@@ -1,3 +1,5 @@
+/* eslint-disable no-self-assign */
+/* eslint-disable no-param-reassign */
 /* eslint-disable use-isnan */
 /* ********************************************************************************************
  *                                                                                            *
@@ -216,9 +218,7 @@ function getTail(arr, n) {
  *    +'30,31,32,33,34'
  */
 function toCsvText(arr) {
-  // eslint-disable-next-line no-return-assign, no-param-reassign
-  arr.forEach((x) => x[x.length - 1] = `${x}\n`);
-  return arr.flat().slice(0, arr.flat().length - 1).toString();
+  return (arr.map((x) => (arr.indexOf(x) !== arr.length - 1 ? `${x.join(',')}\n` : `${x.join(',')}`)).join(''));
 }
 
 /**
@@ -653,18 +653,8 @@ function selectMany(/* arr, childrenSelector */) {
  *   ['one','two','three'], [2]       => 'three'  (arr[2])
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
-function getElementByIndexes(arr, indexes) {
-  // eslint-disable-next-line no-console
-  console.log(indexes);
-  let indStr = '';
-  for (let i = 0; i < indexes.length; i += 1) {
-    indStr += `[${indexes[i]}]`;
-  }
-  // eslint-disable-next-line no-console
-  console.log(indStr);
-  // eslint-disable-next-line no-console
-  console.log(typeof indStr);
-  return +`${arr}${indStr}`;
+function getElementByIndexes(/* arr, indexes */) {
+  throw new Error('Not implemented');
 }
 
 

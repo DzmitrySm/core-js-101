@@ -44,8 +44,10 @@ function getComposition(f, g) {
  *   power05(16) => 4
  *
  */
-function getPowerFunction(/* exponent */) {
-  throw new Error('Not implemented');
+function getPowerFunction(exponent) {
+  return function power(x) {
+    return x ** exponent;
+  };
 }
 
 
@@ -148,7 +150,7 @@ function logger(/* func, logFunc */) {
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
 function partialUsingArguments(fn, ...args1) {
-  return fn(...args1);
+  return (fn, args1);
 }
 
 
