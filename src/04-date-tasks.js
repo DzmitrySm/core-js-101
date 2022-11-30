@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-operators */
 /* *******************************************************************************************
  *                                                                                           *
  * Please read the following tutorial before implementing tasks:                              *
@@ -103,7 +104,6 @@ function timeSpanToString(startDate, endDate) {
 function angleBetweenClockHands(/* date */) {
   throw new Error('Not implemented');
 }
-
 
 module.exports = {
   parseDataFromRfc2822,
