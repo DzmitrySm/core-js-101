@@ -616,12 +616,15 @@ function distinct(arr) {
 function group(array, keySelector, valueSelector) {
   const myMap = new Map();
   for (let i = 0; i < array.length; i += 1) {
-    if (!myMap.has(array[i][keySelector])) {
-      myMap.set(array[i][keySelector], [array[i][valueSelector]]);
-    } if (myMap.has(array[i][keySelector])) {
-      myMap.set(array[i][keySelector], array[i][valueSelector]);
+    if (myMap.has(keySelector(array[i]))) {
+      // eslint-disable-next-line max-len
+      myMap.get(keySelector(array[i])).push(valueSelector(array[i]));
+    }
+    if (myMap.has(keySelector(array[i])) === false) {
+      myMap.set(keySelector(array[i]), [valueSelector(array[i])]);
     }
   }
+  return (myMap);
 }
 
 
@@ -656,13 +659,8 @@ function selectMany(arr, childrenSelector) {
  *   ['one','two','three'], [2]       => 'three'  (arr[2])
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
-function getElementByIndexes(arr, indexes) {
-  if (indexes.length === 1) {
-    return arr[indexes[0]];
-  } if (indexes.length > 1) {
-    indexes.shift(indexes[0]);
-    return getElementByIndexes(arr, indexes);
-  }
+function getElementByIndexes(/* arr, indexes */) {
+  throw new Error('Not implemented');
 }
 
 
