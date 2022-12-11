@@ -203,8 +203,18 @@ function extractEmails(str) {
  *             '└──────────┘\n'
  *
  */
-function getRectangleString(/* width, height */) {
-  throw new Error('Not implemented');
+// eslint-disable-next-line no-unused-vars
+function getRectangleString(width, height) {
+  const symbol1 = '┌';
+  const symbol2 = '─';
+  const symbol3 = '┐';
+  const symbol4 = '│';
+  const symbol5 = ' ';
+  const symbol6 = '┘';
+  const symbol7 = '└';
+  const symbol8 = '─';
+  const secondSeq = `${symbol4}${symbol5.repeat(width - 2)}${symbol4}\n`.repeat(height - 2);
+  return `${symbol1.repeat(1)}${symbol2.repeat(width - 2)}${symbol3.repeat(1)}\n${secondSeq}${symbol7.repeat(1)}${symbol8.repeat(width - 2)}${symbol6.repeat(1)}\n`;
 }
 
 
