@@ -386,7 +386,6 @@ function isBracketsBalanced(str) {
       arr.pop();
     }
   } if (arr.length === 0) {
-    console.log(arr);
     return true;
   } return false;
 }
