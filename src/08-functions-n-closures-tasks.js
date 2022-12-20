@@ -159,8 +159,15 @@ function logger(/* func, logFunc */) {
  *   partialUsingArguments(fn, 'a','b','c')('d') => 'abcd'
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
-function partialUsingArguments(/* fn, ...args1 */) {
-  throw new Error('Not implemented');
+function partialUsingArguments(fn, ...arg) {
+  const argRed = arg.reduce((a, b) => a + b);
+  return function hey(...b) {
+    if (b.length === 0) {
+      return argRed;
+    }
+    const e = b.reduce((z, f) => z + f);
+    return argRed + e;
+  };
 }
 
 
