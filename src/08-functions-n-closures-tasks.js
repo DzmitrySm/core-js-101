@@ -113,18 +113,9 @@ function memoize(/* func */) {
  * }, 2);
  * retryer() => 2
  */
-function retry(func, attempts) {
-  let count = 0;
-  try {
-    if (count < attempts) {
-      count += 1;
-      func();
-    }
-  } catch (error) {
-    throw new Error();
-  }
+function retry(/* func, attempts */) {
+  throw new Error('Not implemented');
 }
-
 
 /**
  * Returns the logging wrapper for the specified method,
