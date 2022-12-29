@@ -432,7 +432,7 @@ function toNaryString(num, n) {
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
 function getCommonDirectoryPath(pathes) {
-  console.log(pathes.map((x) => x.split('/')));
+  return pathes.map((x) => x.split('/'));
 }
 
 
