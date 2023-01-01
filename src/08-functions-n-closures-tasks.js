@@ -117,6 +117,7 @@ function retry(/* func, attempts */) {
   throw new Error('Not implemented');
 }
 
+
 /**
  * Returns the logging wrapper for the specified method,
  * Logger has to log the start and end of calling the specified function.
@@ -140,8 +141,13 @@ function retry(/* func, attempts */) {
  * cos(3.141592653589793) ends
  *
  */
-function logger(/* func, logFunc */) {
-  throw new Error('Not implemented');
+function logger(func, logFunc) {
+  return function loggy(...args) {
+    logFunc(`${func.name}(${JSON.stringify(args).slice(1, JSON.stringify(args).length - 1)}) starts`);
+    const result = func(...args);
+    logFunc(`${func.name}(${JSON.stringify(args).slice(1, JSON.stringify(args).length - 1)}) ends`);
+    return result;
+  };
 }
 
 
